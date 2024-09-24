@@ -14,7 +14,7 @@ namespace Конструирование_ПО
     public partial class Form1 : Form
     {
         string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["StudyPlanString"].ConnectionString;
-        SqlDataAdapter planAdapter, fieldOfStudyAdapter;
+        SqlDataAdapter planAdapter, fieldOfStudyAdapter, departmentAdapter;
 
         SqlCommandBuilder planBuilder, fieldOfStudyBuilder;
         DataSet ds = new DataSet();
@@ -24,22 +24,33 @@ namespace Конструирование_ПО
 
             planAdapter = new SqlDataAdapter("select * from \"Plan\"", connectionString);
             fieldOfStudyAdapter = new SqlDataAdapter("select * from \"Field_of_study\"", connectionString);
+            departmentAdapter = new SqlDataAdapter("select * from \"Department\"", connectionString);
+
             planBuilder = new SqlCommandBuilder(planAdapter);
             fieldOfStudyBuilder = new SqlCommandBuilder(fieldOfStudyAdapter);
+
             planAdapter.Fill(ds, "Plan");
             fieldOfStudyAdapter.Fill(ds, "Field_of_study");
+            departmentAdapter.Fill(ds, "Department");
             dataGridView1.DataSource = ds.Tables["Plan"];
             dataGridView4.DataSource = ds.Tables["Field_of_study"];
-            FillPlanCombobox();
+            FillComboboxes();
         }
 
-        void FillPlanCombobox()
+        void FillComboboxes()
         {
             ((DataGridViewComboBoxColumn)dataGridView1.Columns["ID_Field_of_study"]).DataSource =
                 ds.Tables["Field_of_study"];
             ((DataGridViewComboBoxColumn)dataGridView1.Columns["ID_Field_of_study"]).DisplayMember =
                 "Code";
             ((DataGridViewComboBoxColumn)dataGridView1.Columns["ID_Field_of_study"]).ValueMember =
+                "ID";
+
+            ((DataGridViewComboBoxColumn)dataGridView1.Columns["ID_Department"]).DataSource =
+                ds.Tables["Department"];
+            ((DataGridViewComboBoxColumn)dataGridView1.Columns["ID_Department"]).DisplayMember =
+                "Abbreviation";
+            ((DataGridViewComboBoxColumn)dataGridView1.Columns["ID_Department"]).ValueMember =
                 "ID";
         }
 

@@ -54,7 +54,7 @@
             this.Duration = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Qualification = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ID_Field_of_study = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.ID_Department = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ID_Department = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -276,52 +276,70 @@
             // ID
             // 
             this.ID.DataPropertyName = "ID";
+            this.ID.FillWeight = 50.81241F;
             this.ID.HeaderText = "ID";
             this.ID.Name = "ID";
+            this.ID.Width = 43;
             // 
             // Admission_date
             // 
             this.Admission_date.DataPropertyName = "Admission_date";
+            this.Admission_date.FillWeight = 134.8538F;
             this.Admission_date.HeaderText = "Admission_date";
             this.Admission_date.Name = "Admission_date";
+            this.Admission_date.Width = 114;
             // 
             // Specialty
             // 
             this.Specialty.DataPropertyName = "Specialty";
+            this.Specialty.FillWeight = 92.16988F;
             this.Specialty.HeaderText = "Specialty";
             this.Specialty.Name = "Specialty";
+            this.Specialty.Width = 78;
             // 
             // Form
             // 
             this.Form.DataPropertyName = "Form";
+            this.Form.FillWeight = 68.22616F;
             this.Form.HeaderText = "Form";
             this.Form.Name = "Form";
+            this.Form.Width = 58;
             // 
             // Duration
             // 
             this.Duration.DataPropertyName = "Duration";
+            this.Duration.FillWeight = 92.1867F;
             this.Duration.HeaderText = "Duration";
             this.Duration.Name = "Duration";
+            this.Duration.Width = 78;
             // 
             // Qualification
             // 
             this.Qualification.DataPropertyName = "Qualification";
+            this.Qualification.FillWeight = 115.1006F;
             this.Qualification.HeaderText = "Qualification";
             this.Qualification.Name = "Qualification";
+            this.Qualification.Width = 97;
             // 
             // ID_Field_of_study
             // 
             this.ID_Field_of_study.DataPropertyName = "ID_Field_of_study";
-            this.ID_Field_of_study.HeaderText = "ID_Field_of_study";
+            this.ID_Field_of_study.FillWeight = 123.8477F;
+            this.ID_Field_of_study.HeaderText = "Field_of_study";
             this.ID_Field_of_study.Name = "ID_Field_of_study";
             this.ID_Field_of_study.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.ID_Field_of_study.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.ID_Field_of_study.Width = 105;
             // 
             // ID_Department
             // 
             this.ID_Department.DataPropertyName = "ID_Department";
+            this.ID_Department.FillWeight = 122.8028F;
             this.ID_Department.HeaderText = "ID_Department";
             this.ID_Department.Name = "ID_Department";
+            this.ID_Department.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.ID_Department.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.ID_Department.Width = 104;
             // 
             // Form1
             // 
@@ -372,7 +390,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Duration;
         private System.Windows.Forms.DataGridViewTextBoxColumn Qualification;
         private System.Windows.Forms.DataGridViewComboBoxColumn ID_Field_of_study;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ID_Department;
+        private System.Windows.Forms.DataGridViewComboBoxColumn ID_Department;
     }
 }
 
