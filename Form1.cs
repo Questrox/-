@@ -35,11 +35,11 @@ namespace Конструирование_ПО
 
         void FillPlanCombobox()
         {
-            ((DataGridViewComboBoxColumn)dataGridView1.Columns["FK_Field_of_study"]).DataSource =
+            ((DataGridViewComboBoxColumn)dataGridView1.Columns["ID_Field_of_study"]).DataSource =
                 ds.Tables["Field_of_study"];
-            ((DataGridViewComboBoxColumn)dataGridView1.Columns["FK_Field_of_study"]).DisplayMember =
+            ((DataGridViewComboBoxColumn)dataGridView1.Columns["ID_Field_of_study"]).DisplayMember =
                 "Code";
-            ((DataGridViewComboBoxColumn)dataGridView1.Columns["FK_Field_of_study"]).ValueMember =
+            ((DataGridViewComboBoxColumn)dataGridView1.Columns["ID_Field_of_study"]).ValueMember =
                 "ID";
         }
 

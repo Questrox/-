@@ -31,14 +31,6 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Admission_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Specialty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Form = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Duration = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Qualification = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FK_Field_of_study = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.FK_Department = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button1 = new System.Windows.Forms.Button();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.button4 = new System.Windows.Forms.Button();
@@ -55,6 +47,14 @@
             this.button3 = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Admission_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Specialty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Form = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Duration = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Qualification = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ID_Field_of_study = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.ID_Department = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -101,62 +101,12 @@
             this.Form,
             this.Duration,
             this.Qualification,
-            this.FK_Field_of_study,
-            this.FK_Department});
+            this.ID_Field_of_study,
+            this.ID_Department});
             this.dataGridView1.Location = new System.Drawing.Point(1, 0);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(720, 344);
             this.dataGridView1.TabIndex = 1;
-            // 
-            // ID
-            // 
-            this.ID.DataPropertyName = "ID";
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            // 
-            // Admission_date
-            // 
-            this.Admission_date.DataPropertyName = "Admission_date";
-            this.Admission_date.HeaderText = "Admission_date";
-            this.Admission_date.Name = "Admission_date";
-            // 
-            // Specialty
-            // 
-            this.Specialty.DataPropertyName = "Specialty";
-            this.Specialty.HeaderText = "Specialty";
-            this.Specialty.Name = "Specialty";
-            // 
-            // Form
-            // 
-            this.Form.DataPropertyName = "Form";
-            this.Form.HeaderText = "Form";
-            this.Form.Name = "Form";
-            // 
-            // Duration
-            // 
-            this.Duration.DataPropertyName = "Duration";
-            this.Duration.HeaderText = "Duration";
-            this.Duration.Name = "Duration";
-            // 
-            // Qualification
-            // 
-            this.Qualification.DataPropertyName = "Qualification";
-            this.Qualification.HeaderText = "Qualification";
-            this.Qualification.Name = "Qualification";
-            // 
-            // FK_Field_of_study
-            // 
-            this.FK_Field_of_study.DataPropertyName = "FK_Field_of_study";
-            this.FK_Field_of_study.HeaderText = "FK_Field_of_study";
-            this.FK_Field_of_study.Name = "FK_Field_of_study";
-            this.FK_Field_of_study.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.FK_Field_of_study.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // FK_Department
-            // 
-            this.FK_Department.DataPropertyName = "FK_Department";
-            this.FK_Department.HeaderText = "FK_Department";
-            this.FK_Department.Name = "FK_Department";
             // 
             // button1
             // 
@@ -323,6 +273,56 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "Выберите дату:";
             // 
+            // ID
+            // 
+            this.ID.DataPropertyName = "ID";
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            // 
+            // Admission_date
+            // 
+            this.Admission_date.DataPropertyName = "Admission_date";
+            this.Admission_date.HeaderText = "Admission_date";
+            this.Admission_date.Name = "Admission_date";
+            // 
+            // Specialty
+            // 
+            this.Specialty.DataPropertyName = "Specialty";
+            this.Specialty.HeaderText = "Specialty";
+            this.Specialty.Name = "Specialty";
+            // 
+            // Form
+            // 
+            this.Form.DataPropertyName = "Form";
+            this.Form.HeaderText = "Form";
+            this.Form.Name = "Form";
+            // 
+            // Duration
+            // 
+            this.Duration.DataPropertyName = "Duration";
+            this.Duration.HeaderText = "Duration";
+            this.Duration.Name = "Duration";
+            // 
+            // Qualification
+            // 
+            this.Qualification.DataPropertyName = "Qualification";
+            this.Qualification.HeaderText = "Qualification";
+            this.Qualification.Name = "Qualification";
+            // 
+            // ID_Field_of_study
+            // 
+            this.ID_Field_of_study.DataPropertyName = "ID_Field_of_study";
+            this.ID_Field_of_study.HeaderText = "ID_Field_of_study";
+            this.ID_Field_of_study.Name = "ID_Field_of_study";
+            this.ID_Field_of_study.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.ID_Field_of_study.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // ID_Department
+            // 
+            this.ID_Department.DataPropertyName = "ID_Department";
+            this.ID_Department.HeaderText = "ID_Department";
+            this.ID_Department.Name = "ID_Department";
+            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(728, 433);
@@ -371,8 +371,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Form;
         private System.Windows.Forms.DataGridViewTextBoxColumn Duration;
         private System.Windows.Forms.DataGridViewTextBoxColumn Qualification;
-        private System.Windows.Forms.DataGridViewComboBoxColumn FK_Field_of_study;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FK_Department;
+        private System.Windows.Forms.DataGridViewComboBoxColumn ID_Field_of_study;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID_Department;
     }
 }
 
