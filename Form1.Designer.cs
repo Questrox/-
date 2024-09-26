@@ -47,6 +47,9 @@
             this.button3 = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
+            this.ID_Grid4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Code_Grid4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Name_Grid4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Admission_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Specialty = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -55,6 +58,9 @@
             this.Qualification = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ID_Field_of_study = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.ID_Department = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.Name_Grid3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Name_Grid2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Volume_Grid2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -142,6 +148,10 @@
             // dataGridView4
             // 
             this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView4.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ID_Grid4,
+            this.Code_Grid4,
+            this.Name_Grid4});
             this.dataGridView4.Location = new System.Drawing.Point(-4, 0);
             this.dataGridView4.Name = "dataGridView4";
             this.dataGridView4.Size = new System.Drawing.Size(726, 342);
@@ -177,6 +187,9 @@
             this.dataGridView2.AllowUserToAddRows = false;
             this.dataGridView2.AllowUserToDeleteRows = false;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Name_Grid2,
+            this.Volume_Grid2});
             this.dataGridView2.Location = new System.Drawing.Point(0, 133);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.ReadOnly = true;
@@ -240,6 +253,8 @@
             this.dataGridView3.AllowUserToAddRows = false;
             this.dataGridView3.AllowUserToDeleteRows = false;
             this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView3.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Name_Grid3});
             this.dataGridView3.Location = new System.Drawing.Point(1, 137);
             this.dataGridView3.Name = "dataGridView3";
             this.dataGridView3.ReadOnly = true;
@@ -273,6 +288,24 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "Выберите дату:";
             // 
+            // ID_Grid4
+            // 
+            this.ID_Grid4.DataPropertyName = "ID";
+            this.ID_Grid4.HeaderText = "ID";
+            this.ID_Grid4.Name = "ID_Grid4";
+            // 
+            // Code_Grid4
+            // 
+            this.Code_Grid4.DataPropertyName = "Code";
+            this.Code_Grid4.HeaderText = "Код направления";
+            this.Code_Grid4.Name = "Code_Grid4";
+            // 
+            // Name_Grid4
+            // 
+            this.Name_Grid4.DataPropertyName = "Name";
+            this.Name_Grid4.HeaderText = "Название";
+            this.Name_Grid4.Name = "Name_Grid4";
+            // 
             // ID
             // 
             this.ID.DataPropertyName = "ID";
@@ -284,48 +317,48 @@
             // Admission_date
             // 
             this.Admission_date.DataPropertyName = "Admission_date";
-            this.Admission_date.FillWeight = 134.8538F;
-            this.Admission_date.HeaderText = "Admission_date";
+            this.Admission_date.FillWeight = 134.7106F;
+            this.Admission_date.HeaderText = "Дата принятия";
             this.Admission_date.Name = "Admission_date";
             this.Admission_date.Width = 114;
             // 
             // Specialty
             // 
             this.Specialty.DataPropertyName = "Specialty";
-            this.Specialty.FillWeight = 92.16988F;
-            this.Specialty.HeaderText = "Specialty";
+            this.Specialty.FillWeight = 92.18448F;
+            this.Specialty.HeaderText = "Профиль";
             this.Specialty.Name = "Specialty";
             this.Specialty.Width = 78;
             // 
             // Form
             // 
             this.Form.DataPropertyName = "Form";
-            this.Form.FillWeight = 68.22616F;
-            this.Form.HeaderText = "Form";
+            this.Form.FillWeight = 68.54495F;
+            this.Form.HeaderText = "Форма обучения";
             this.Form.Name = "Form";
             this.Form.Width = 58;
             // 
             // Duration
             // 
             this.Duration.DataPropertyName = "Duration";
-            this.Duration.FillWeight = 92.1867F;
-            this.Duration.HeaderText = "Duration";
+            this.Duration.FillWeight = 92.14318F;
+            this.Duration.HeaderText = "Срок";
             this.Duration.Name = "Duration";
             this.Duration.Width = 78;
             // 
             // Qualification
             // 
             this.Qualification.DataPropertyName = "Qualification";
-            this.Qualification.FillWeight = 115.1006F;
-            this.Qualification.HeaderText = "Qualification";
+            this.Qualification.FillWeight = 114.5925F;
+            this.Qualification.HeaderText = "Квалификация";
             this.Qualification.Name = "Qualification";
             this.Qualification.Width = 97;
             // 
             // ID_Field_of_study
             // 
             this.ID_Field_of_study.DataPropertyName = "ID_Field_of_study";
-            this.ID_Field_of_study.FillWeight = 123.8477F;
-            this.ID_Field_of_study.HeaderText = "Field_of_study";
+            this.ID_Field_of_study.FillWeight = 124.1194F;
+            this.ID_Field_of_study.HeaderText = "Направление";
             this.ID_Field_of_study.Name = "ID_Field_of_study";
             this.ID_Field_of_study.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.ID_Field_of_study.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
@@ -334,12 +367,33 @@
             // ID_Department
             // 
             this.ID_Department.DataPropertyName = "ID_Department";
-            this.ID_Department.FillWeight = 122.8028F;
-            this.ID_Department.HeaderText = "ID_Department";
+            this.ID_Department.FillWeight = 122.8926F;
+            this.ID_Department.HeaderText = "Кафедра";
             this.ID_Department.Name = "ID_Department";
             this.ID_Department.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.ID_Department.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.ID_Department.Width = 104;
+            // 
+            // Name_Grid3
+            // 
+            this.Name_Grid3.DataPropertyName = "Name";
+            this.Name_Grid3.HeaderText = "Факультет";
+            this.Name_Grid3.Name = "Name_Grid3";
+            this.Name_Grid3.ReadOnly = true;
+            // 
+            // Name_Grid2
+            // 
+            this.Name_Grid2.DataPropertyName = "Name";
+            this.Name_Grid2.HeaderText = "Название";
+            this.Name_Grid2.Name = "Name_Grid2";
+            this.Name_Grid2.ReadOnly = true;
+            // 
+            // Volume_Grid2
+            // 
+            this.Volume_Grid2.DataPropertyName = "Volume";
+            this.Volume_Grid2.HeaderText = "Объем";
+            this.Volume_Grid2.Name = "Volume_Grid2";
+            this.Volume_Grid2.ReadOnly = true;
             // 
             // Form1
             // 
@@ -383,6 +437,9 @@
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.DataGridView dataGridView4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID_Grid4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Code_Grid4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Name_Grid4;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Admission_date;
         private System.Windows.Forms.DataGridViewTextBoxColumn Specialty;
@@ -391,6 +448,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Qualification;
         private System.Windows.Forms.DataGridViewComboBoxColumn ID_Field_of_study;
         private System.Windows.Forms.DataGridViewComboBoxColumn ID_Department;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Name_Grid3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Name_Grid2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Volume_Grid2;
     }
 }
 

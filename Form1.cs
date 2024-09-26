@@ -21,7 +21,6 @@ namespace Конструирование_ПО
         public Form1()
         {
             InitializeComponent();
-
             planAdapter = new SqlDataAdapter("select * from \"Plan\"", connectionString);
             fieldOfStudyAdapter = new SqlDataAdapter("select * from \"Field_of_study\"", connectionString);
             departmentAdapter = new SqlDataAdapter("select * from \"Department\"", connectionString);
@@ -69,8 +68,8 @@ namespace Конструирование_ПО
         private void button2_Click(object sender, EventArgs e)
         {
             string sql = "SELECT Discipline.Name, PD.Volume FROM Plan_discipline AS PD\r" +
-                "JOIN Discipline ON Discipline.ID = PD.FK_Discipline\r" +
-                "WHERE FK_Plan = " + numericUpDown1.Value.ToString() + "\r" +
+                "JOIN Discipline ON Discipline.ID = PD.ID_Discipline\r" +
+                "WHERE ID_Plan = " + numericUpDown1.Value.ToString() + "\r" +
                 "ORDER BY Volume DESC";
             using (SqlConnection sqlConnection = new SqlConnection(connectionString))
             {
