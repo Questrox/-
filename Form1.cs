@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
@@ -13,40 +14,44 @@ namespace Конструирование_ПО
 {
     public partial class Form1 : Form
     {
-        string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["StudyPlanString"].ConnectionString;
-        SqlDataAdapter planAdapter, fieldOfStudyAdapter, departmentAdapter;
+        Model1 dbcontext = new Model1();
+        List<Plan> allPlans;
+        List<Field_of_study> allFields;
+        List<Department> allDepartments;
 
-        SqlCommandBuilder planBuilder, fieldOfStudyBuilder;
-        DataSet ds = new DataSet();
         public Form1()
         {
             InitializeComponent();
-            planAdapter = new SqlDataAdapter("select * from \"Plan\"", connectionString);
-            fieldOfStudyAdapter = new SqlDataAdapter("select * from \"Field_of_study\"", connectionString);
-            departmentAdapter = new SqlDataAdapter("select * from \"Department\"", connectionString);
+            LoadData();
+        }
 
-            planBuilder = new SqlCommandBuilder(planAdapter);
-            fieldOfStudyBuilder = new SqlCommandBuilder(fieldOfStudyAdapter);
-
-            planAdapter.Fill(ds, "Plan");
-            fieldOfStudyAdapter.Fill(ds, "Field_of_study");
-            departmentAdapter.Fill(ds, "Department");
-            dataGridView1.DataSource = ds.Tables["Plan"];
-            dataGridView4.DataSource = ds.Tables["Field_of_study"];
+        void LoadData()
+        {
+            allFields = dbcontext.Field_of_study.ToList();
+            allDepartments = dbcontext.Department.ToList();
+            LoadPlans();
             FillComboboxes();
+        }
+
+        void LoadPlans()
+        {
+            dbcontext.Plan.Load();
+            allPlans = dbcontext.Plan.ToList();
+            dataGridView1.AutoGenerateColumns = false;
+            dataGridView1.DataSource = allPlans;
         }
 
         void FillComboboxes()
         {
             ((DataGridViewComboBoxColumn)dataGridView1.Columns["ID_Field_of_study"]).DataSource =
-                ds.Tables["Field_of_study"];
+                dbcontext.Field_of_study.ToList();
             ((DataGridViewComboBoxColumn)dataGridView1.Columns["ID_Field_of_study"]).DisplayMember =
                 "Code";
             ((DataGridViewComboBoxColumn)dataGridView1.Columns["ID_Field_of_study"]).ValueMember =
                 "ID";
 
             ((DataGridViewComboBoxColumn)dataGridView1.Columns["ID_Department"]).DataSource =
-                ds.Tables["Department"];
+                dbcontext.Department.ToList();
             ((DataGridViewComboBoxColumn)dataGridView1.Columns["ID_Department"]).DisplayMember =
                 "Abbreviation";
             ((DataGridViewComboBoxColumn)dataGridView1.Columns["ID_Department"]).ValueMember =
@@ -57,7 +62,7 @@ namespace Конструирование_ПО
         {
             try
             {
-                planAdapter.Update(ds, "Plan");
+                dbcontext.SaveChanges();
             }
             catch (Exception ex)
             {
@@ -67,58 +72,132 @@ namespace Конструирование_ПО
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string sql = "SELECT Discipline.Name, PD.Volume FROM Plan_discipline AS PD\r" +
-                "JOIN Discipline ON Discipline.ID = PD.ID_Discipline\r" +
-                "WHERE ID_Plan = " + numericUpDown1.Value.ToString() + "\r" +
-                "ORDER BY Volume DESC";
-            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
-            {
-                sqlConnection.Open();
-                SqlCommand sqlCommand = new SqlCommand(sql, sqlConnection);
-                SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
-                DataTable dataTable = new DataTable("report1");
-                dataTable.Columns.Add("Name");
-                dataTable.Columns.Add("Volume");
-                while (sqlDataReader.Read())
-                {
-                    DataRow row = dataTable.NewRow();
-                    row["Name"] = sqlDataReader["Name"];
-                    row["Volume"] = sqlDataReader["Volume"];
-                    dataTable.Rows.Add(row);
-                }
-                sqlDataReader.Close();
-                dataGridView2.DataSource = dataTable;
-            }
+            var request = dbcontext.Plan_discipline
+                .Join(dbcontext.Discipline, pd => pd.ID_Discipline, disc => disc.ID, (pd, disc) => pd)
+                .Where(i => i.ID_Plan == numericUpDown1.Value)
+                .Select(i => new { Name = i.Discipline.Name, Volume = i.Volume })
+                .OrderBy(i => i.Volume)
+                .ToList();
+            dataGridView2.DataSource = request;
+        }   
+
+        private void AddButton_Click(object sender, EventArgs e)
+        {
+            AddPlanForm f = new AddPlanForm();
+
+            f.comboBox1.DataSource = allFields;
+            f.comboBox1.DisplayMember = "Code";
+            f.comboBox1.ValueMember = "ID";
+
+            f.comboBox2.DataSource = allDepartments;
+            f.comboBox2.DisplayMember = "Abbreviation";
+            f.comboBox2.ValueMember = "ID";
+
+            DialogResult result = f.ShowDialog(this);
+
+            if (result == DialogResult.Cancel)
+                return;
+            Plan plan = new Plan();
+            plan.ID_Field_of_study = (int)f.comboBox1.SelectedValue;
+            plan.ID_Department = (int)f.comboBox2.SelectedValue;
+            plan.Admission_date = f.dateTimePicker1.Value;
+            plan.Specialty = f.textBox1.Text;
+            plan.Form = f.textBox2.Text;
+            plan.Duration = (int)f.numericUpDown1.Value;
+            plan.Qualification = f.textBox3.Text;
+
+            dbcontext.Plan.Add(plan);
+            dbcontext.SaveChanges();
+            LoadPlans();
+            MessageBox.Show("Новый объект добавлен");
         }
 
+        class SPResult
+        {
+            public string Name { get; set; }
+        }
         private void button3_Click(object sender, EventArgs e)
         {
-            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
-            {
-                SqlDataAdapter sqlAdapter = new SqlDataAdapter("GetPlans", sqlConnection);
-                sqlAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
-
-                sqlAdapter.SelectCommand.Parameters.Add(new SqlParameter("@date", SqlDbType.Date));
-                sqlAdapter.SelectCommand.Parameters["@date"].Value = dateTimePicker1.Value;
-
-
-                DataSet dataSet = new DataSet();
-                sqlAdapter.Fill(dataSet, "report2");
-
-                dataGridView3.DataSource = dataSet.Tables["report2"];
-            }
+            SqlParameter param = new SqlParameter("@date", dateTimePicker1.Value);
+            var result = dbcontext.Database.SqlQuery<SPResult>("GetPlans @date", new object[] {param}).ToList();
+            dataGridView3.DataSource = result;
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void UpdateButton_Click(object sender, EventArgs e)
         {
-            try
+            int index = GetSelectedRow(dataGridView1);
+            if (index != -1)
             {
-                fieldOfStudyAdapter.Update(ds, "Field_of_study");
+                int id = 0;
+                bool converted = Int32.TryParse(dataGridView1[0, index].Value.ToString(), out id);
+                if (converted == false)
+                    return;
+
+                Plan plan = dbcontext.Plan.Where(i => i.ID == id).FirstOrDefault();
+                if (plan != null)
+                {
+                    AddPlanForm f = new AddPlanForm();
+
+                    f.comboBox1.DataSource = allFields;
+                    f.comboBox1.DisplayMember = "Code";
+                    f.comboBox1.ValueMember = "ID";
+                    f.comboBox2.DataSource = allDepartments;
+                    f.comboBox2.DisplayMember = "Abbreviation";
+                    f.comboBox2.ValueMember = "ID";
+
+                    f.dateTimePicker1.Value = plan.Admission_date;
+                    f.textBox1.Text = plan.Specialty;
+                    f.textBox2.Text = plan.Form;
+                    f.numericUpDown1.Value = plan.Duration;
+                    f.textBox3.Text = plan.Qualification;
+                    f.comboBox1.SelectedValue = plan.ID_Field_of_study;
+                    f.comboBox2.SelectedValue = plan.ID_Department;
+                    
+                    DialogResult result = f.ShowDialog(this);
+
+                    if (result == DialogResult.Cancel)
+                        return;
+                    plan.ID_Field_of_study = (int)f.comboBox1.SelectedValue;
+                    plan.ID_Department = (int)f.comboBox2.SelectedValue;
+                    plan.Admission_date = f.dateTimePicker1.Value;
+                    plan.Specialty = f.textBox1.Text;
+                    plan.Form = f.textBox2.Text;
+                    plan.Duration = (int)f.numericUpDown1.Value;
+                    plan.Qualification = f.textBox3.Text;
+
+
+                    dbcontext.SaveChanges();
+                    MessageBox.Show("Объект обновлен");
+                }
             }
-            catch (Exception ex)
+            else
+                MessageBox.Show("Ни один объект не выбран!");
+        }
+        
+        int GetSelectedRow(DataGridView dataGridView)
+        {
+            int index = -1;
+            if (dataGridView.SelectedRows.Count > 0 || dataGridView.SelectedCells.Count == 1)
             {
-                MessageBox.Show("Ошибка при обновлении данных");
+                if (dataGridView.SelectedRows.Count > 0)
+                    index = dataGridView.SelectedRows[0].Index;
+                else index = dataGridView.SelectedCells[0].RowIndex;
             }
+            return index;
+        }
+
+        private void DeleteButton_Click(object sender, EventArgs e)
+        {
+            int index = GetSelectedRow(dataGridView1);
+            if (index != -1)
+            {
+                var row = dbcontext.Plan.Find(index);
+                dbcontext.Plan.Remove(row);
+                dbcontext.SaveChanges();
+                LoadPlans();
+            }
+            else
+                MessageBox.Show("Ни один объект не выбран!");
         }
     }
 }
